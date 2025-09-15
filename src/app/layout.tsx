@@ -1,15 +1,25 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Raleway, Poppins } from "next/font/google";
 import "./globals.css";
+import SessionWrapper from "@/components/SessionWrapper";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const raleway = Raleway({
   subsets: ["latin"],
+  display: "swap",
+  variable: "--font-raleway",
+});
+
+const poppins = Poppins({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-poppins",
 });
 
 export const metadata: Metadata = {
@@ -19,16 +29,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+    <html
+      lang="en"
+      className={`${inter.variable} ${raleway.variable} ${poppins.variable}`}
+    >
+      <SessionWrapper>
+        <body suppressHydrationWarning={true}>{children}</body>
+      </SessionWrapper>
     </html>
   );
 }
